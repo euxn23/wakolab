@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="keyword" content="wakolab, wakolab.jp, wakolabjp, wakotsu laboratory, wakotsulab, わこらぼ, わこつらぼらとりー">
+  <title><%= content_for?(:title)? yield(:title) : "Wakotsu Laboratory" %></title>
+  <style type="text/css">
+  body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+  </style>
+  <link href="/app/assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">WakoLab.</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="<%= @current_path %>"><%= @current_loc %></a></li>
+
+            <!-- Wakotsu Services -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Wakotsu Services <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/rs/">Wakotsu Reservation</a></li>
+                <li><a href="/an/">Wakotsu Animation</a></li>
+                <li><a href="/ds/">Wakotsu Discussion Space</a></li>
+                <li><a href="http://wakolab.jp/press/" target="_blank">Wakotsu Press</a></li>
+              </ul>
+            </li>
+
+            <!-- 制作物 -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Product <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Aina</a></li>
+                <li><a href="http://shukoji.com/" target="_blank">就活乞食.com</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/me/">About Me</a></li>
+                <li><a href="http://twitter.com/wakolab" target="_blank">Twitter</a></li>
+                <li><a href="http://twitter.com/euta23" target="_blank">Something is Wrong.</a></li>
+              </ul>
+            </li>
+          <li class="divider-vertical"></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <% unless signed_in? %>
+          <li class="active pull-right" align="right"><a href="/auth/twitter">Sign in with Twitter</a></li>
+          <% else %>
+          <li class="active"><a href="/signout"><img src="http://api.dan.co.jp/twicon/<%= session[:user_sid] %>" width="18" alt="" />&nbsp;<%= session[:user_sid] %> : Sign out</a></li>
+          <% end %>
+
+          </ul>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+
+    <%= yield %>
+
+    <hr>
+    <footer>
+      <p style="text-align: right;">&copy; WakoLab2013 </p>
+    </footer>
+  </div>
+</body>
+</html>

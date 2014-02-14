@@ -1,0 +1,69 @@
+<%= form_for(@reservation, :html => {:class => 'form-horizontal'}) do |f| %>
+  <% if @reservation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+      <% @reservation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="font-size: medium;">
+    <div>
+      <p><%= f.label :開催内容 %></p>
+      <% if @def_param %>
+      <%= f.text_field :what, :value => @def_param['what'] %>
+      <% else %>
+      <%= f.text_field :what%>
+      <% end %>
+    </div>
+    <br>
+    <div class="field">
+      <p><%= f.label :詳細 %></p>
+      <% if @def_param %>
+      <%= f.text_area :how ,:size => '30x10', :value => @def_param['how'] %>
+      <% else %>
+      <%= f.text_area :how ,:size => '30x10' %>
+      <% end %>
+    </div>
+    <br>
+    <div class="field">
+      <p><%= f.label :起案者 %></p>
+      <%= f.text_field :who, :value => '@'+session[:user_sid] %><br>
+      twitterIDを@形式で入力するとリンクされます.<br>
+    </div>
+    <br>
+    <div class="field">
+      <p><%= f.label :開催日 %></p>
+      開始 : <%= f.date_select :when_from %><br>
+      終了 : <%= f.date_select :when_to %><br>
+      日程が確定してる場合は同じ日程を選択してください.<br>
+    </div>
+    <br>
+    <div class="field">
+      <p><%= f.label :時刻 %></p>
+      開始 : <%= f.text_field :span_from %><br>
+      終了 : <%= f.text_field :span_to %><br>
+    </div>
+    <br>
+    <div class="field">
+      <p><%= f.label :プライベート %>
+      <%= f.check_box :private %></p>
+      チェックすると日程以外の企画内容が非公開になります.<br>
+    </div>
+    <br>
+    <div class="field">
+      <p><%= f.label :参加者 %></p>
+      <%= f.text_area :with, :size => '20x6' %><br>
+      共同起案者,参加予定者を入力してください.<br>
+      twitterIDを改行して@形式で入力すると自動リンクされます.<br>
+    </div>
+    <br>
+    <div class="actions">
+      <%= f.submit :value => '予約する' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,118 @@
+<% @current_loc = "Wakotsu Reservation" %>
+<% @current_path = "/rs/" %>
+<% session[:current_path] = @current_path %>
+
+<% content_for :title do %>
+  <% unless @reservation.private %>
+    [<%= @reservation.what %>] | Wakotsu Reservation
+  <% else %>
+    Wakotsu Reservation
+  <% end %>
+<% end %>
+
+<% unless @reservation.private %>
+  <div class="jumbotron">
+    <% if @reservation.what %>
+      <h2><%= @reservation.what %></h2>
+    <% else %>
+      <h2><a href="http://twitter.com/@<%= @reservation.sid %>" target="_blank">@<%= @reservation.sid %></a> 's Event</h2>
+    <% end %>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <%if @reservation.when_from == @reservation.when_to %>
+              開催日：<%= @reservation.when_from %>
+              <% else %>
+              開催日：<%= @reservation.when_from %>〜<%= @reservation.when_to %>
+              <% end %>
+              &nbsp;
+              時刻：<%= @reservation.span_from %>
+              <% if @reservation.span_to == nil %>
+              〜<%= @reservation.span_to %>
+              <% end %>
+
+            </h2>
+          </div>
+
+          <div class="panel-body">
+            <div class="col-sm-8">
+              <p>
+                開催内容：
+                <ul>
+                  <% @reservation.how.each_line do |line| %>
+                  <%= h(line) %><br>
+                  <% end %>
+                </ul>
+              </p>
+            </div>
+            <div class="col-sm-4">
+            <p>
+              <% if @reservation.who[0,1]=='@' %>
+              主催：
+              <ul>
+                <a target="_blank" href="http://twitter.com/<%= @reservation.who[1..-1] %>"><%= @reservation.who %></a>
+              </ul>
+              <% else %>
+              <ul>
+                <%= @reservation.who %>
+              </ul>
+              <% end %>
+            </p>
+            <p>
+              参加者：
+              <ul>
+                <% @reservation.with.each_line do |line| %>
+                  <% if line[0,1]=='@' %>
+                <a target="_blank" href="http://twitter.com/<%= line[1..-1] %>"><%= h(line) %></a><br>
+                  <% else %>
+                <%= line %><br>
+                  <% end %>
+                <% end %>
+              </ul>
+            </p>
+
+            <%# 作成者の場合 %>
+            <% if session[:user_uid].to_i == @reservation.uid %>
+
+            <%= link_to '編集', edit_reservation_path(@reservation), class:"btn btn-sm btn-primary" %>
+            <%= link_to '削除', @reservation, class:"btn btn-sm btn-primary", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+
+            <%# 作成者以外 %>
+            <% else %>
+
+              <% if @reservation.who[0,1]=='@' %>
+                <%#@reservation.whatがある場合%>
+                <% if @reservation.what %>
+              <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/ds/#{@reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{@reservation.what}(@#{@reservation.who[1..-1]} Reserved)への参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
+            </div>
+
+                <%# ない場合 %>
+                <% else %>
+            <div style="position: absolute; right: 30px; bottom: 30px;">
+              <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/ds/#{@reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{@reservation.who[1..-1]} あなたの作成したイベントへの参加を希望します. | Wakotsu @reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
+            </div>
+                <% end %>
+
+            </div>
+
+              <% else %>
+                <input type="button" class="btn btn-sm btn-primary" value="参加" onClick="alert('参加希望者は起案者へ直接ご連絡ください.')">
+              <% end %>
+            <% end %>
+          </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="jumbotron">
+    <h2>Private Reservation</h2>
+  </div>
+<% end %>

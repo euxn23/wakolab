@@ -1,0 +1,74 @@
+<% @current_loc = "Wakotsu Animation" %>
+<% @current_path = "/an/" %>
+<% session[:current_path] = @current_path %>
+
+<% content_for :title do %>
+  Wakotsu Animation
+<% end %>
+
+<article>
+
+<div class="jumbotron">
+  <h1>Wakotsu Animation</h1>
+  <%= image_tag("ds4.jpg", :alt => "Wakotsu DS", :width => 1020) %><br>
+  <br>
+  <div class="panel panel-success">
+    <div class="panel-heading"><h2 class="panel-title">Welcome to Wakotsu Animation</h2></div>
+    <div class="panel-body">
+      <p>Wakotsu Discussion Spaceで見たいAnimationのSuggestシステムです.</p>
+      <p>Twitterでのログインにより登録、予約システムへの移行が行えます.</p>
+      <hr>
+      <h2>What's New</h2>
+      <p>ドメインを変更しました.</p>
+      <% if signed_in? %>
+        <p><a href="new" class="btn btn-primary btn-large">登録する &raquo;</a></p>
+      <% else %>
+        <p><a href="/auth/twitter" class="btn btn-primary btn-large">Sign in with Twitter</a></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<% @animations.each do |animation| %>
+  <div class="col-sm-4">
+    <div class="panel panel-success" style="height: 240px;">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <a href="/an/<%= animation.id %>"><%= animation.title %></a>
+        </h2>
+        <% if animation.owner[0,1]=='@' %>
+        <span style="position: absolute; text-align: right; right: 20px; top: 15px">(<a target="_blank" href="http://twitter.com/<%= animation.owner[1..-1] %>"><%= animation.owner %></a>)</span>
+        <% else %>
+        <%= animation.owner %>
+        <% end %>
+      </div>
+
+      <div class="panel-body">
+        <p>
+          ジャンル：<%= animation.cat %>&nbsp;全<%= animation.episodes %>話
+        </p>
+        <p>
+          <% animation.detail.each_line do |line| %>
+          <p><%= h(line) %></p>
+          <% break %>
+          <% end %>
+        </p>
+
+        <div style="position: absolute; right: 30px; bottom: 30px;">
+          <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/an/#{animation.id}") %>&text=<%= CGI.escape("[#{animation.title}] #{animation.cat} 全#{animation.episodes}話 | Wakotsu Animation") %>" class="btn btn-sm btn-primary" target="_blank">Twitterでシェア</a>
+
+          <%# 作成者の場合 %>
+          <% if session[:user_uid].to_i == animation.uid.to_i %>
+          <%= link_to 'わこつDSで予約',"/rs/new?id=#{animation.id}&from=an", class:"btn btn-sm btn-primary" %>
+          <%= link_to '編集', edit_animation_path(animation), class:"btn btn-sm btn-primary" %>
+          <%= link_to '削除', animation, class:"btn btn-sm btn-primary", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+</article>

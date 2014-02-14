@@ -1,0 +1,67 @@
+<% @current_loc = "Wakotsu Animation" %>
+<% @current_path = "/an/" %>
+<% session[:current_path] = @current_path %>
+
+<% content_for :title do %>
+  [<%= @animation.title %>] | Wakotsu Animation
+<% end %>
+
+<div class="jumbotron">
+  <h2><%= @animation.title %></h2>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h2 class="panel-title">
+            ジャンル：<%= @animation.cat %>&nbsp;全<%= @animation.episodes %>話
+          </h2>
+        </div>
+
+        <div class="panel-body">
+          <div class="col-sm-8">
+            <p>
+
+            </p>
+            <p>
+              <% @animation.detail.each_line do |line| %>
+              <p><%= h(line) %></p>
+              <% end %>
+            </p>
+
+          </div>
+          <div class="col-sm-4">
+            <p>
+              推薦者
+              <ul>
+                <% if @animation.owner[0,1]=='@' %>
+                <a target="_blank" href="http://twitter.com/<%= @animation.owner[1..-1] %>"><%= @animation.owner %></a>
+                <% else %>
+                <%= @animation.owner %>
+                <% end %>
+              </ul>
+            </p>
+            <p>
+              見たい！
+              <ul>
+                調整中
+              </ul>
+            </p>
+
+            <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/an/#{@animation.id}") %>&text=<%= CGI.escape("[#{@animation.title}] #{@animation.cat} 全#{@animation.episodes}話 | Wakotsu Animation") %>" class="btn btn-sm btn-primary" target="_blank">Twitterでシェア</a>
+
+            <%# 作成者の場合 %>
+            <% if session[:user_uid].to_i == @animation.uid.to_i %>
+            <%= link_to 'わこつDSで予約',"/rs/new?id=#{@animation.id}&from=an", class:"btn btn-sm btn-primary" %>
+            <br>
+            <%= link_to '編集', edit_animation_path(@animation), class:"btn btn-sm btn-primary" %>
+            <%= link_to '削除', @animation, class:"btn btn-sm btn-primary", method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</article>

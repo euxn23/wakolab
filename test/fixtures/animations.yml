@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  owner: MyString
+  cat: MyString
+  detail: MyText
+  episodes: 1
+  uid: MyString
+  sid: MyString
+
+two:
+  title: MyString
+  owner: MyString
+  cat: MyString
+  detail: MyText
+  episodes: 1
+  uid: MyString
+  sid: MyString

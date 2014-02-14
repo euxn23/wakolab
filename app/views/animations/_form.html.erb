@@ -1,0 +1,45 @@
+<%= form_for(@animation) do |f| %>
+  <% if @animation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@animation.errors.count, "error") %> prohibited this animation from being saved:</h2>
+
+      <ul>
+      <% @animation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="font-size: medium;">
+    <div>
+      <p><%= f.label :作品タイトル %></p>
+      <%= f.text_field :title %>
+    </div>
+    <br>
+    <div class="field">
+      <p><%= f.label :推薦者 %></p>
+      <%= f.text_field :owner, :value => '@'+session[:user_sid] %><br>
+      twitterIDを@形式で入力するとリンクされます.<br>
+    </div>
+    <br>
+    <div>
+      <p><%= f.label :ジャンル %></p>
+      <%= f.text_field :cat %>
+    </div>
+    <br>
+    <div class="field">
+      <p><%= f.label :作品詳細・概要 %></p>
+      <%= f.text_area :detail ,:size => '30x10'%>
+    </div>
+    <br>
+    <div>
+      <p><%= f.label :話数 %></p>
+      <%= f.number_field :episodes %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= f.submit :value => '登録する' %>
+    </div>
+  </div>
+<% end %>

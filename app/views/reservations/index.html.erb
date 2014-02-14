@@ -1,0 +1,131 @@
+<% @current_loc = "Wakotsu Reservation" %>
+<% @current_path = "/rs/" %>
+<% session[:current_path] = @current_path %>
+
+<% content_for :title do %>
+  Wakotsu Reservation
+<% end %>
+
+<article>
+
+<div class="jumbotron">
+  <h1>Wakotsu Reservation</h1>
+  <%= image_tag("ds4.jpg", :alt => "Wakotsu DS", :width => 1020) %><br>
+  <br>
+  <div class="panel panel-success">
+    <div class="panel-heading"><h2 class="panel-title">Welcome to Wakotsu Reservation</h2></div>
+    <div class="panel-body">
+      <p>Wakotsu Discussion Spaceの予約システムです.</p>
+      <p>Twitterでのログインをすることで予約,参加申請が可能です.</p>
+      <hr>
+      <h2>What's New</h2>
+      <p>ドメインを変更しました.</p>
+      <% if signed_in? %>
+        <p><a href="new" class="btn btn-primary btn-large">予約する &raquo;</a></p>
+      <% else %>
+        <p><a href="/auth/twitter" class="btn btn-primary btn-large">Sign in with Twitter</a></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+  <% @reservations.each do |reservation| %>
+    <div class="col-sm-4">
+      <div class="panel panel-success" style="height: 240px;">
+
+      <%#▽ Public ▽%>
+      <% if !reservation.private %>
+
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <% if reservation.what %>
+          <a href="/rs/<%= reservation.id %>"><%= reservation.what %></a>
+        </h2>
+            <% if reservation.who[0,1]=='@' %>
+          <span style="position: absolute; text-align: right; right: 20px; top: 15px">(<a target="_blank" href="http://twitter.com/<%= reservation.who[1..-1] %>"><%= reservation.who %></a>)</span>
+            <% else %>
+          <%= reservation.who %>
+            <% end %>
+
+          <% else %>
+          <a href="http://twitter.com/@<%= reservation.sid %>" target="_blank">@<%= reservation.sid %></a> 's<a href="<%= reservation.id %>">Event</a>
+        </h2>
+          <% end %>
+      </div>
+
+      <div class="panel-body">
+        <p>
+          <%if reservation.when_from == reservation.when_to %>
+          <%= reservation.when_from %>
+          <% else %>
+          <%= reservation.when_from %>〜<%= reservation.when_to %>
+          <% end %>
+        </p>
+        <p>
+          <%= reservation.span_from %>
+          <% if reservation.span_to == nil %>
+          〜<%= reservation.span_to %>
+          <% end %>
+        </p>
+        <p>
+          <% reservation.with.each_line do |line| %>
+            <% if line[0,1]=='@' %>
+          <a target="_blank" href="http://twitter.com/<%= line[1..-1] %>"><%= h(line) %></a><br>
+            <% else %>
+          <%= line %><br>
+            <% end %>
+          <% end %>
+        </p>
+
+        <%# 作成者の場合 %>
+        <%if session[:user_uid].to_i == reservation.uid %>
+
+        <div style="position: absolute; right: 30px; bottom: 30px;">
+        <%= link_to '編集', edit_reservation_path(reservation), class:"btn btn-sm btn-primary" %>
+        <%= link_to '削除', reservation, class:"btn btn-sm btn-primary", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+
+        <%# 作成者以外 %>
+        <%else%>
+
+          <% if reservation.who[0,1]=='@' %>
+        <div style="position: absolute; right: 30px; bottom: 30px;">
+            <%#reservation.whatがある場合%>
+            <% if reservation.what %>
+        <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/ds/#{reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{reservation.what}(@#{reservation.who[1..-1]} Reserved)への参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
+
+            <%# ない場合 %>
+            <% else %>
+        <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/ds/#{reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{reservation.who[1..-1]} あなたの作成したイベントへの参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
+            <% end %>
+
+        </div>
+
+          <% else %>
+            <input type="button" class="btn btn-sm btn-primary" value="参加" onClick="alert('参加希望者は起案者へ直接ご連絡ください.')">
+          <% end %>
+        <% end %>
+
+      </div>
+      <%#△ Public △%>
+
+      <%#▽ Private ▽%>
+      <% else %>
+
+        <div class="panel-heading">
+          <h2 class="panel-title">Private Reservation</h2>
+        </div>
+        <div class="panel-body">
+        </div>
+
+      <% end %>
+      <%#△ Private △%>
+
+      </div>
+    </div>
+  <% end %>
+  </div>
+
+</article>
+

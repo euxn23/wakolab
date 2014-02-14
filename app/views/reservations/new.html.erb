@@ -1,0 +1,13 @@
+<% @current_loc = "Wakotsu Reservation" %>
+<% @current_path = "/rs/" %>
+
+<% content_for :title do %>
+  Wakotsu Reservation
+<% end %>
+
+<div class="jumbotron" style="line-height: 1;">
+	<h1>New Reservation</h1>
+	<br>
+
+	<%= render 'form' %>
+</div>
