@@ -7,7 +7,8 @@ class AnimationsController < ApplicationController
     @animations = Animation.page(params[:page]).per(3)
     respond_to do |format|
       format.html
-      format.json { render :json }
+      # format.json { render :json }
+      format.js
     end
   end
 
