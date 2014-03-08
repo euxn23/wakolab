@@ -4,7 +4,11 @@ class AnimationsController < ApplicationController
   # GET /animations
   # GET /animations.json
   def index
-    @animations = Animation.all
+    @animations = Animation.page(params[:page]).per(3)
+    respond_to do |format|
+      format.html
+      format.json { render :json }
+    end
   end
 
   # GET /animations/1

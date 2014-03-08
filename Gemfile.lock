@@ -208,6 +208,7 @@ DEPENDENCIES
   execjs
   jbuilder (~> 1.2)
   jquery-rails
+  kaminari
   omniauth-twitter
   rails (= 4.0.0)
   rails_admin!
