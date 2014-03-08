@@ -1,4 +1,4 @@
-<%= form_for(@animation) do |f| %>
+<%= form_for(@animation, :html => {:name => 'form'}) do |f| %>
   <% if @animation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@animation.errors.count, "error") %> prohibited this animation from being saved:</h2>
@@ -43,3 +43,19 @@
     </div>
   </div>
 <% end %>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script>
+  $("form").submit(function(){
+    if((!document.form.animation_title.value)||(!document.form.animation_owner.value)||(!document.form.animation_cat.value)||(!document.form.animation_detail.value)||(!document.form.animation_episodes.value)) {
+      alert("未入力の項目があります。");
+      return false;
+    } else {
+      if (window.confirm("送信してよろしいですか？")) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  });
+</script>

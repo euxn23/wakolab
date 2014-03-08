@@ -49,10 +49,7 @@
           ジャンル：<%= animation.cat %>&nbsp;全<%= animation.episodes %>話
         </p>
         <p>
-          <% animation.detail.each_line do |line| %>
-          <p><%= h(line) %></p>
-          <% break %>
-          <% end %>
+          <%= truncate(h(animation.detail), :length => 100, :omission => "...")  %>
         </p>
 
         <div style="position: absolute; right: 30px; bottom: 30px;">
