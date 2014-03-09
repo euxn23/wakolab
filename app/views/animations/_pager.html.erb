@@ -1,0 +1,5 @@
+<div style="text-align: center;">
+  <!-- <%= paginate @animations, :remote => true %> -->
+  <%= link_to_previous_page(@animations,'前へ',:remote => true, :class => 'btn btn-primary') %>
+  <%= link_to_next_page(@animations,'次へ',:remote => true, :class => 'btn btn-primary') %>
+</div>
