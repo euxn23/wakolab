@@ -22,7 +22,7 @@
         </p>
 
         <div style="position: absolute; right: 30px; bottom: 30px;">
-          <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/an/#{animation.id}") %>&text=<%= CGI.escape("[#{animation.title}] #{animation.cat} 全#{animation.episodes}話 | Wakotsu Animation") %>" class="btn btn-sm btn-primary" target="_blank">Twitterでシェア</a>
+          <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.info/an/#{animation.id}") %>&text=<%= CGI.escape("[#{animation.title}] #{animation.cat} 全#{animation.episodes}話 | Wakotsu Animation") %>" class="btn btn-sm btn-primary" target="_blank">Twitterでシェア</a>
 
           <%# 作成者の場合 %>
           <% if session[:user_uid].to_i == animation.uid.to_i %>

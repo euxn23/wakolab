@@ -4,7 +4,13 @@ class AnimationsController < ApplicationController
   # GET /animations
   # GET /animations.json
   def index
-    @animations = Animation.page(params[:page]).per(3)
+    if params[:mode] == 'all'
+      @animations = Animation.all
+    else
+      @animations = Animation.page(params[:page]).per(3)
+      @rb_pagemode = true
+    end
+
     respond_to do |format|
       format.html
       # format.json { render :json }
