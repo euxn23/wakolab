@@ -86,13 +86,13 @@
               <% if @reservation.who[0,1]=='@' %>
                 <%#@reservation.whatがある場合%>
                 <% if @reservation.what %>
-              <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/ds/#{@reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{@reservation.what}(@#{@reservation.who[1..-1]} Reserved)への参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
+              <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.info/rs/#{@reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{@reservation.what}(@#{@reservation.who[1..-1]} Reserved)への参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
             </div>
 
                 <%# ない場合 %>
                 <% else %>
             <div style="position: absolute; right: 30px; bottom: 30px;">
-              <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.jp/ds/#{@reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{@reservation.who[1..-1]} あなたの作成したイベントへの参加を希望します. | Wakotsu @reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
+              <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.info/rs/#{@reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{@reservation.who[1..-1]} あなたの作成したイベントへの参加を希望します. | Wakotsu @reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
             </div>
                 <% end %>
 

@@ -93,11 +93,11 @@
         <div style="position: absolute; right: 30px; bottom: 30px;">
             <%#reservation.whatがある場合%>
             <% if reservation.what %>
-        <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.info/ds/#{reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{reservation.what}(@#{reservation.who[1..-1]} Reserved)への参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
+        <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.info/rs/#{reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{reservation.what}(@#{reservation.who[1..-1]} Reserved)への参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
 
             <%# ない場合 %>
             <% else %>
-        <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.info/ds/#{reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{reservation.who[1..-1]} あなたの作成したイベントへの参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
+        <a href="http://twitter.com/intent/tweet?url=<%= CGI.escape("http://wakolab.info/rs/#{reservation.id}") %>&text=<%= CGI.escape("[わこつ〜] #{reservation.who[1..-1]} あなたの作成したイベントへの参加を希望します. | Wakotsu Reservation") %>" class="btn btn-sm btn-primary" target="_blank">参加</a>
             <% end %>
 
         </div>
