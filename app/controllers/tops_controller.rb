@@ -5,6 +5,7 @@ class TopsController < ApplicationController
   end
 
   def aboutme
+    @profile = Profile.first
   end
 
   def ds

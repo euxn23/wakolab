@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214092531) do
+ActiveRecord::Schema.define(version: 20140420153813) do
 
   create_table "animations", force: true do |t|
     t.string   "title"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20140214092531) do
     t.integer  "episodes"
     t.string   "uid"
     t.string   "sid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "profiles", force: true do |t|
+    t.text     "profile"
+    t.text     "hobby"
+    t.text     "skill"
+    t.text     "lately"
+    t.text     "history"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,11 +48,6 @@ ActiveRecord::Schema.define(version: 20140214092531) do
     t.boolean  "private"
     t.integer  "uid"
     t.string   "sid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tops", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
