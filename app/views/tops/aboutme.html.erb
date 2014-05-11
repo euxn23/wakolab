@@ -11,9 +11,7 @@
 					<div class="panel panel-success">
 						<div class="panel-heading"><h2 class="panel-title">Profile</h2></div>
 						<div class="panel-body">
-							<% @profile.profile.each_line do |line| %>
-							<p><%= line %></p>
-							<% end %>
+							<p><%= simple_format(@profile.profile) %></p>
 							<hr>
 							<a href="http://github.com/YutaSZK" target="_blank"><button type="button" class="btn btn-lg btn-warning">Github</button></a>
 							<a href="http://www.amazon.co.jp/registry/wishlist/3MJDA7W8W7EE8" target="_blank"><button type="button" class="btn btn-lg btn-success">WishList</button></a>
@@ -29,20 +27,16 @@
 				<div class="col-sm-8">
 					<div class="panel panel-success" style="height: 400px;">
 						<div class="panel-heading"><h2 class="panel-title">趣味</h2></div>
-						<div class="panel-body">
-							<% @profile.hobby.each_line do |line| %>
-							<p><%= line %></p>
-							<% end %>
+						<div class="panel-body" style="line-height: 150%;">
+								<p><%= simple_format(@profile.hobby) %></p>
 						</div>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="panel panel-success" style="height :400px;">
 						<div class="panel-heading"><h2 class="panel-title">スキル</h2></div>
-						<div class="panel-body">
-							<% @profile.skill.each_line do |line| %>
-							<p><%= line %></p>
-							<% end %>
+						<div class="panel-body"　style="line-height: 150%">
+							<p><%= simple_format(@profile.skill) %></p>
 						</div>
 					</div>
 				</div>
@@ -51,9 +45,7 @@
 					<div class="panel panel-success" style="height: 400px;">
 						<div class="panel-heading"><h2 class="panel-title">近況</h2></div>
 						<div class="panel-body">
-							<% @profile.lately.each_line do |line| %>
-							<p><%= line %></p>
-							<% end %>
+							<p><%= simple_format(@profile.lately) %></p>
 						</div>
 					</div>
 				</div>
@@ -61,9 +53,7 @@
 					<div class="panel panel-success" style="height: 400px;">
 						<div class="panel-heading"><h2 class="panel-title">経歴</h2></div>
 						<div class="panel-body">
-							<% @profile.history.each_line do |line| %>
-							<p><%= line %></p>
-							<% end %>
+							<p><%= simple_format(@profile.history) %></p>
 						</div>
 					</div>
 				</div>

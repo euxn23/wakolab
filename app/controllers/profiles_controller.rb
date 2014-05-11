@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-
+  before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_filter :admin_check
 
   def admin_check
@@ -7,7 +7,6 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = Profile.find(params[:id])
   end
 
   def new
@@ -15,7 +14,6 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = Profile.find(params[:id])
   end
 
   # POST /profiles
@@ -41,7 +39,7 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'profile was successfully updated.' }
+        format.html { redirect_to '/admin', notice: 'profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -63,7 +61,7 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = profile.find(params[:id])
+      @profile = Profile.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
