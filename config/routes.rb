@@ -1,15 +1,16 @@
 Wakolab::Application.routes.draw do
   resources :animations
-
   resources :tops
-
   resources :reservations
+  resources :profiles
 
   get '/auth/:provider/callback' => 'sessions#create'
   get '/signout' => 'sessions#destroy'
 
   get '/' => 'tops#index'
   get '/me/' => 'tops#aboutme'
+
+  get '/admin' => 'tops#admin'
 
   get '/ds/' => 'tops#ds'
   get '/ds/coil' => 'tops#ds_coil'

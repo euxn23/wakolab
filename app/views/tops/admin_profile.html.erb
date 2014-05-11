@@ -1,0 +1,17 @@
+<% @current_loc = "Wakotsu Laboratory" %>
+<% @current_path = "/" %>
+
+<% content_for :title do %>
+  Admin | Wakotsu Laboratory
+<% end %>
+
+<div>
+  <%= form_for @profile do |f| %>
+  <p>プロフィール:<br><%= f.text_area :profile, :size => '30x3' %></p>
+  <p>趣味:<br><%= f.text_area :hobby, :size => '30x3' %></p>
+  <p>スキル:<br><%= f.text_area :skill, :size => '30x3' %></p>
+  <p>近況:<br><%= f.text_area :lately, :size => '30x3' %></p>
+  <p>実績:<br><%= f.text_area :history, :size => '30x3' %></p>
+  <p><%= f.submit '更新', :disable_with => '更新中...' %></p>
+  <% end %>
+</div>

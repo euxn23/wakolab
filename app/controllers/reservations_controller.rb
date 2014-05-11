@@ -58,7 +58,6 @@ class ReservationsController < ApplicationController
       @reservation = Reservation.new(reservation_params)
       @reservation.uid = session[:user_uid]
       @reservation.sid = session[:user_sid]
-      @reservation.save
 
       respond_to do |format|
         if @reservation.save

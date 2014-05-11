@@ -54,7 +54,6 @@ class AnimationsController < ApplicationController
       @animation = Animation.new(animation_params)
       @animation.uid = session[:user_uid]
       @animation.sid = session[:user_sid]
-      @animation.save
 
       respond_to do |format|
         if @animation.save

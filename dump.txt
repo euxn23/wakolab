@@ -1,0 +1,62 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
+INSERT INTO "schema_migrations" VALUES('20140208065532');
+INSERT INTO "schema_migrations" VALUES('20140208080434');
+INSERT INTO "schema_migrations" VALUES('20140208092722');
+INSERT INTO "schema_migrations" VALUES('20140208141601');
+INSERT INTO "schema_migrations" VALUES('20140208141707');
+INSERT INTO "schema_migrations" VALUES('20140214092531');
+INSERT INTO "schema_migrations" VALUES('20140420145045');
+INSERT INTO "schema_migrations" VALUES('20140420153813');
+INSERT INTO "schema_migrations" VALUES('20140420161004');
+CREATE TABLE "reservations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "what" varchar(255), "how" text, "who" varchar(255), "with" varchar(255), "others" text, "when_from" date, "when_to" date, "span_from" varchar(255), "span_to" varchar(255), "private" boolean, "uid" integer, "sid" varchar(255), "created_at" datetime, "updated_at" datetime);
+INSERT INTO "reservations" VALUES(3,'わこつハッカソン','ハックします','@euta23','@marimekko_oy
+@yuy120
+@haruraruru',NULL,'2014-02-14','2014-02-16','3日間','','f',123857414,'euta23','2014-02-14 00:59:48.812699','2014-02-14 00:59:48.812699');
+INSERT INTO "reservations" VALUES(5,'ミートソン','わこらぼでお肉をたくさん食べます。
+車でコストコで買い出ししてくる予定です。
+買い出し後（夕方頃？）からの参加もOK。
+時刻は仮決定。キャパは10人程度。
+参加希望者は参加リンクまたは直接ご連絡ください
+(参加リンクはモバイルでは使えません。修正予定)','@euta23','@marimekko_oy
+@MotoharuOno',NULL,'2014-02-14','2014-02-14','','','f',NULL,'euta23','2014-02-14 04:14:46.948437','2014-02-14 04:14:46.948437');
+INSERT INTO "reservations" VALUES(6,'ミートソン2','わこらぼでお肉をたくさん食べます。 
+車でコストコで買い出ししてくる予定です。 
+買い出し後（夕方頃？）からの参加もOK。 
+時刻は仮決定。キャパは10人程度。 
+参加希望者は参加リンクまたは直接ご連絡ください(参加リンクはモバイルでは使えません。修正予定)','@euta23','',NULL,'2014-02-14','2014-02-14','','','f',NULL,'euta23','2014-02-14 04:15:48.873595','2014-02-14 04:15:48.873595');
+INSERT INTO "reservations" VALUES(7,'あ2','','@euta23','',NULL,'2014-02-14','2014-02-14','','','f',NULL,'euta23','2014-02-14 04:22:43.803590','2014-02-14 04:22:43.803590');
+INSERT INTO "reservations" VALUES(9,'あ','','@euta23','',NULL,'2014-02-14','2014-02-14','','','f',123857414,'euta23','2014-02-14 05:05:27.289127','2014-02-14 18:33:31.241551');
+INSERT INTO "reservations" VALUES(10,'pppp','','@euta23','',NULL,'2014-02-14','2014-02-14','','','t',123857414,'euta23','2014-02-14 18:33:14.138865','2014-02-14 18:33:14.138865');
+CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider" varchar(255), "uid" varchar(255), "name" varchar(255), "created_at" datetime, "updated_at" datetime);
+CREATE TABLE "animations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "owner" varchar(255), "cat" varchar(255), "detail" text, "episodes" integer, "uid" varchar(255), "sid" varchar(255), "created_at" datetime, "updated_at" datetime);
+INSERT INTO "animations" VALUES(1,'ソードアート・オンライン','@euta23','SF','ゲームの中に入れるネトゲから出られなくなるしゲーム内で死ぬとリアルでも死ぬ。 
+
+これはゲームであっても、遊びではない',24,'','','2014-02-14 18:50:49.734778','2014-02-14 18:50:49.734778');
+INSERT INTO "animations" VALUES(2,'SAO','@euta23','SF','やばい',24,NULL,NULL,'2014-02-14 19:41:22.966470','2014-02-14 19:41:22.966470');
+INSERT INTO "animations" VALUES(3,'さお','@euta23','えすえふ','さおやばいよ',21,'123857414','euta23','2014-02-14 19:45:54.672198','2014-02-14 20:11:04.003184');
+INSERT INTO "animations" VALUES(4,'はげr','@euta23','','ひかる',NULL,'123857414','euta23','2014-02-14 20:13:16.362305','2014-02-14 20:13:16.362305');
+INSERT INTO "animations" VALUES(5,'','@euta23','','
+',NULL,'123857414','euta23','2014-03-08 14:30:03.889435','2014-03-08 14:30:03.889435');
+INSERT INTO "animations" VALUES(6,'','@euta23','','“終戦”を迎えたばかりの近未来の東京。そこでは、探偵業が流行らなくなった代わりに、メディア王・海勝麟六が膨大な情報量と優れた頭脳を生かして、幾多の難事件を解決していた。しかし、実は麟六の推理には裏があり、それをあぶり出すのが、「最後の名探偵」を自称する結城新十郎と、その相棒・因果。世間からは、「敗戦探偵」と言われているが、それでも2人は力を合わせて、様々な難事件の解決に挑むのだった。',NULL,'123857414','euta23','2014-03-08 14:30:45.916867','2014-03-08 14:30:45.916867');
+INSERT INTO "animations" VALUES(7,'','@euta23','','',NULL,'123857414','euta23','2014-03-08 14:38:36.273368','2014-03-08 14:38:36.273368');
+INSERT INTO "animations" VALUES(8,'','@euta23','','',NULL,'123857414','euta23','2014-03-08 14:38:42.201207','2014-03-08 14:38:42.201207');
+INSERT INTO "animations" VALUES(9,'','@euta23','','',NULL,'123857414','euta23','2014-03-08 14:40:21.717337','2014-03-08 14:40:21.717337');
+INSERT INTO "animations" VALUES(10,'','@euta23','','',NULL,'123857414','euta23','2014-03-08 14:42:07.653821','2014-03-08 14:42:07.653821');
+INSERT INTO "animations" VALUES(11,'','@euta23','','',NULL,'123857414','euta23','2014-03-08 14:43:37.001674','2014-03-08 14:43:37.001674');
+INSERT INTO "animations" VALUES(12,'','@euta23','','',NULL,'123857414','euta23','2014-03-08 14:43:42.145658','2014-03-08 14:43:42.145658');
+INSERT INTO "animations" VALUES(13,'はい','@euta23','','',NULL,'123857414','euta23','2014-03-08 14:43:57.222251','2014-03-08 14:43:57.222251');
+INSERT INTO "animations" VALUES(14,'','@euta23','','',NULL,'123857414','euta23','2014-03-08 14:46:33.292079','2014-03-08 14:46:33.292079');
+INSERT INTO "animations" VALUES(15,'はげ','@euta23','ああ','うん',1,'123857414','euta23','2014-03-08 14:47:59.589311','2014-03-08 14:47:59.589311');
+INSERT INTO "animations" VALUES(16,'ひひ','@euta23','ああ','うん',2,'123857414','euta23','2014-03-08 14:48:10.306804','2014-03-08 14:48:10.306804');
+INSERT INTO "animations" VALUES(17,'はげ','@euta23','ああ','うん',1,'123857414','euta23','2014-03-08 14:48:17.449700','2014-03-08 14:48:17.449700');
+CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "password_digest" varchar(255), "created_at" datetime, "updated_at" datetime);
+INSERT INTO "admins" VALUES(1,'admin','$2a$10$9jvMxRolyOAxF5MycSxR5ePU1V34mFaOtyotARxRyLIqT1W9eQU2m','2014-04-21 01:22:10.740657','2014-04-21 01:22:10.740657');
+DELETE FROM sqlite_sequence;
+INSERT INTO "sqlite_sequence" VALUES('users',31);
+INSERT INTO "sqlite_sequence" VALUES('reservations',10);
+INSERT INTO "sqlite_sequence" VALUES('animations',17);
+INSERT INTO "sqlite_sequence" VALUES('admins',1);
+CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version");
+COMMIT;
