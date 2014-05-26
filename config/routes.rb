@@ -25,6 +25,8 @@ Wakolab::Application.routes.draw do
   get '/an/(:id)' => 'animations#show'
   get '/an/edit' => 'animations#edit'
 
+  get '/edpshp' => redirect('https://www.evernote.com/shard/s149/sh/4247a99d-cb78-4eb8-b72f-e414d80beab0/e0116fd3b82b9a96e8e107e66f08a292')
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
